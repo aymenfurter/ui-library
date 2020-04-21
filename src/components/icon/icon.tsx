@@ -20,6 +20,9 @@ export class Icon {
   size: "small" | "medium" | "large" | "" = "";
 
   @Prop()
+  isFont = false;
+
+  @Prop()
   isRight = false;
 
   @Prop()
@@ -33,6 +36,9 @@ export class Icon {
   }
 
   get iconCssClass() {
+    if (this.isFont) {
+      return `icon-${this.name}`;
+    }
     return `bal-icon-${this.name}`;
   }
 
@@ -45,7 +51,10 @@ export class Icon {
           this.isLeft ? "is-left" : "",
           this.sizeCssClass,
         ].join(" ")}>
-          <i class={this.iconCssClass}></i>
+          <i class={[
+          this.iconCssClass,
+          this.isFont ? "font" : "svg",
+        ].join(" ")}></i>
         </span>
       </Host>
     );
